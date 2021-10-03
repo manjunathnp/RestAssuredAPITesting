@@ -1,16 +1,19 @@
 package com.basics;
 
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import org.testng.annotations.Test;
 
 import com.infos.Payload;
 
-public class Practice 
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+
+public class AddPlace
 {
-	public static void main(String[] args) 
+	@Test
+	public String addPlace()
 	{
 		RestAssured.baseURI = "https://rahulshettyacademy.com";
 		String response = 
@@ -35,16 +38,12 @@ public class Practice
 		JsonPath js = new JsonPath(response);
 		String status = js.getString("status");
 		String place_id = js.getString("place_id");
-		String scope = js.getString("scope");
 		
-		System.out.println("Status: "+status);
-		System.out.println("Place_ID: "+place_id);
-		System.out.println("Scope: "+scope);
-		System.out.println("******************************************************************************************");
+		System.out.println(place_id);
+		System.out.println(status);
 		
-		
-		
-		
+		return response;
+	
 	}
 
 }
